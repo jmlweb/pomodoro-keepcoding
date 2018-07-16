@@ -2,11 +2,10 @@ import React from 'react';
 import { Provider as StyleProvider } from 'rebass';
 import { injectGlobal } from 'styled-components';
 import { normalize } from 'polished';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import theme from './theme';
-import Header from './Header';
-import Content from './Content';
-import { Home } from '../scenes';
+import { Main, Header, Content } from '../layout';
+import { Home, Settings } from '../scenes';
 
 injectGlobal`
   ${normalize()};
@@ -16,11 +15,14 @@ injectGlobal`
 
 const App = () => (
   <StyleProvider theme={theme}>
-    <Header />
     <BrowserRouter>
-      <Content>
-        <Route path="/" exact component={Home} />
-      </Content>
+      <Main>
+        <Header />
+        <Content>
+          <Route path="/" exact component={Home} />
+          <Route path="/settings" component={Settings} />
+        </Content>
+      </Main>
     </BrowserRouter>
   </StyleProvider>
 );
