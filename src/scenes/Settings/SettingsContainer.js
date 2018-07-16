@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
+import { settingsSet } from '../../store';
 
 class SettingsContainer extends Component {
   state = {
@@ -14,10 +15,12 @@ class SettingsContainer extends Component {
     };
   }
   onChangeField = e => {
-    console.log(e.target.name, e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+  onSubmit = () => {
+    this.props.settingsSet(this.state);
   };
   render() {
     return (
@@ -25,6 +28,7 @@ class SettingsContainer extends Component {
         workingTime={this.state.workingTime}
         restingTime={this.state.restingTime}
         onChangeField={this.onChangeField}
+        onSubmit={this.onSubmit}
       />
     );
   }
@@ -35,4 +39,11 @@ const mapStateToProps = state => ({
   restingTime: state.settings.restingTime,
 });
 
-export default connect(mapStateToProps)(SettingsContainer);
+const mapDispatchToProps = {
+  settingsSet,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsContainer);
