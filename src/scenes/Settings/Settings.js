@@ -14,7 +14,7 @@ const Settings = () => (
         <Label>Tiempo descanso</Label>
         <Input type="number" defaultValue={5} />
       </Box>
-      <Button bg="primary" color="white" fontSize={3}>
+      <Button bg="success" color="white" fontSize={3}>
         Guardar
       </Button>
     </Box>
