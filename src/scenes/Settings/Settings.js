@@ -8,7 +8,7 @@ const Settings = ({ workingTime, restingTime, onChangeField, onSubmit }) => (
     <Box p={4}>
       <Box mb={3}>
         <Label>Tiempo trabajo</Label>
-        <Input
+        <input
           type="number"
           value={workingTime}
           onChange={onChangeField}
@@ -17,7 +17,7 @@ const Settings = ({ workingTime, restingTime, onChangeField, onSubmit }) => (
       </Box>
       <Box mb={3}>
         <Label>Tiempo descanso</Label>
-        <Input
+        <input
           type="number"
           value={restingTime}
           onChange={onChangeField}
