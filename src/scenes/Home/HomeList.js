@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
-import { Box, Flex, Message } from 'rebass';
+import { Box, Message } from 'rebass';
 import HomeListPomodoro from './HomeListPomodoro';
 
 const HomeList = ({
@@ -19,6 +18,7 @@ const HomeList = ({
         />
         {pomodoros.map(({ workingTime, restingTime, createdAt }) => (
           <HomeListPomodoro
+            key={createdAt}
             workingTime={workingTime}
             restingTime={restingTime}
             createdAt={createdAt}

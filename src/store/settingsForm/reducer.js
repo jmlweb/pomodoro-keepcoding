@@ -3,6 +3,7 @@ import {
   SETTINGS_FORM_SET_ALL,
   SETTINGS_FORM_SET_WORKING_TIME,
   SETTINGS_FORM_SET_RESTING_TIME,
+  SETTINGS_FORM_SET_HAS_SUCCESS,
 } from './actions';
 
 const settingsFormReducer = (state = initialState, { type, payload }) => {
@@ -13,6 +14,8 @@ const settingsFormReducer = (state = initialState, { type, payload }) => {
       return { ...state, workingTime: payload };
     case SETTINGS_FORM_SET_RESTING_TIME:
       return { ...state, restingTime: payload };
+    case SETTINGS_FORM_SET_HAS_SUCCESS:
+      return { ...state, hasSuccess: payload };
     default:
       return state;
   }

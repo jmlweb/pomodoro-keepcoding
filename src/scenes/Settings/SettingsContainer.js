@@ -6,6 +6,7 @@ import {
   settingsFormSet,
   settingsFormSetWorkingTime as settingsFormSetWorkingTimeACT,
   settingsFormSetRestingTime as settingsFormSetRestingTimeACT,
+  settingsFormSetHasSuccess as settingsFormSetHasSuccessACT,
 } from '../../store';
 
 class SettingsContainer extends Component {
@@ -18,6 +19,7 @@ class SettingsContainer extends Component {
     settingsFormSet({
       workingTime: initialWorkingTime,
       restingTime: initialRestingTime,
+      hasSuccess: false,
     });
   }
   onChangeField = e => {
@@ -32,20 +34,27 @@ class SettingsContainer extends Component {
     fieldFn(e.target.value);
   };
   onSubmit = () => {
-    const { workingTime, restingTime, settingsSet } = this.props;
+    const {
+      workingTime,
+      restingTime,
+      settingsSet,
+      settingsFormSetHasSuccess,
+    } = this.props;
     settingsSet({
       workingTime,
       restingTime,
     });
+    settingsFormSetHasSuccess(true);
   };
   render() {
-    const { workingTime, restingTime } = this.props;
+    const { workingTime, restingTime, hasSuccess } = this.props;
     return (
       <Settings
         workingTime={workingTime}
         restingTime={restingTime}
         onChangeField={this.onChangeField}
         onSubmit={this.onSubmit}
+        hasSuccess={hasSuccess}
       />
     );
   }
@@ -56,6 +65,7 @@ const mapStateToProps = state => ({
   initialRestingTime: state.settings.restingTime,
   workingTime: state.settingsForm.workingTime,
   restingTime: state.settingsForm.restingTime,
+  hasSuccess: state.settingsForm.hasSuccess,
 });
 
 const mapDispatchToProps = {
@@ -63,6 +73,7 @@ const mapDispatchToProps = {
   settingsFormSet,
   settingsFormSetWorkingTime: settingsFormSetWorkingTimeACT,
   settingsFormSetRestingTime: settingsFormSetRestingTimeACT,
+  settingsFormSetHasSuccess: settingsFormSetHasSuccessACT,
 };
 
 export default connect(

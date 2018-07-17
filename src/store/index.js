@@ -6,6 +6,12 @@ export {
   settingsFormSet,
   settingsFormSetWorkingTime,
   settingsFormSetRestingTime,
+  settingsFormSetHasSuccess,
+  counterSetMode,
+  counterSetWorkingTime,
+  counterSetRestingTime,
+  counterSetTarget,
+  counterReset,
 } from './actions';
 
 const store = createStore(

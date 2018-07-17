@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Card } from '../../components';
 import HomeProgress from './HomeProgress';
-import HomeInfo from './HomeInfo';
+import HomeInfo from './HomeInfoContainer';
 import HomeButtons from './HomeButtons';
 import HomeList from './HomeList';
 

@@ -4,4 +4,5 @@ export {
   settingsFormSet,
   settingsFormSetWorkingTime,
   settingsFormSetRestingTime,
+  settingsFormSetHasSuccess,
 } from './actions';
