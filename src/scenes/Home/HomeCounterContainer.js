@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import HomeCounter from './HomeCounter';
 import {
   counterActiveSelector,
+  counterModeSelector,
+  workingTimeSelector,
+  restingTimeSelector,
   counterSetTarget as counterSetTargetACT,
+  counterSetWorkingTime as counterSetWorkingTimeACT,
+  counterSetRestingTime as counterSetRestingTimeACT,
 } from '../../store';
 
 class HomeCounterContainer extends Component {
@@ -29,7 +34,21 @@ class HomeCounterContainer extends Component {
     this.toggleIntervalIfNeeded();
   }
   startInterval = () => {
-    this.interval = setInterval(() => console.log('interval'), 1000);
+    const INTERVAL_TIME = 500;
+    this.interval = setInterval(() => {
+      const {
+        counterMode,
+        workingTime,
+        restingTime,
+        counterSetWorkingTime,
+        counterSetRestingTime,
+      } = this.props;
+      if (counterMode === 'working') {
+        counterSetWorkingTime(workingTime + INTERVAL_TIME);
+      } else {
+        counterSetRestingTime(restingTime + INTERVAL_TIME);
+      }
+    }, INTERVAL_TIME);
   };
   stopInterval = () => {
     if (this.interval) {
@@ -55,11 +74,16 @@ class HomeCounterContainer extends Component {
 
 const mapStateToProps = state => ({
   counterActive: counterActiveSelector(state),
+  counterMode: counterModeSelector(state),
+  workingTime: workingTimeSelector(state),
+  restingTime: restingTimeSelector(state),
   settingsTarget: state.settings,
 });
 
 const mapDispatchToProps = {
   counterSetTarget: counterSetTargetACT,
+  counterSetWorkingTime: counterSetWorkingTimeACT,
+  counterSetRestingTime: counterSetRestingTimeACT,
 };
 
 export default connect(
