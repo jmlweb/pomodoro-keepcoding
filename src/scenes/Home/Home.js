@@ -1,16 +1,12 @@
 import React, { Fragment } from 'react';
 import { Card } from '../../components';
-import HomeProgress from './HomeProgress';
-import HomeInfo from './HomeInfoContainer';
-import HomeButtons from './HomeButtons';
+import HomeCounter from './HomeCounterContainer';
 import HomeList from './HomeList';
 
 const Home = () => (
   <Fragment>
     <Card title="Contador">
-      <HomeProgress />
-      <HomeInfo />
-      <HomeButtons />
+      <HomeCounter />
     </Card>
     <Card title="3 Pomodoros completados">
       <HomeList />

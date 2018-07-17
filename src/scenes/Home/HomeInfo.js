@@ -1,9 +1,9 @@
 import React from 'react';
 import { Lead, Badge } from 'rebass';
 
-const HomeInfo = ({ clockValue = '-23:12', mode }) => (
+const HomeInfo = ({ clockValue, mode }) => (
   <Lead textAlign="center">
-    {clockValue} <Badge>{mode}</Badge>
+    -{clockValue} <Badge>{mode}</Badge>
   </Lead>
 );
 

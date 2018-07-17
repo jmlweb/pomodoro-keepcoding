@@ -1,4 +1,5 @@
 import {
+  COUNTER_SET_ACTIVE,
   COUNTER_SET_MODE,
   COUNTER_SET_WORKING_TIME,
   COUNTER_SET_RESTING_TIME,
@@ -10,6 +11,8 @@ import initialState from './initialState';
 
 const counterReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case COUNTER_SET_ACTIVE:
+      return { ...state, active: payload };
     case COUNTER_SET_MODE:
       return { ...state, mode: payload };
     case COUNTER_SET_WORKING_TIME:

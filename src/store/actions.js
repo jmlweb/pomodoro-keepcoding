@@ -6,6 +6,7 @@ export {
   settingsFormSetHasSuccess,
 } from './settingsForm';
 export {
+  counterSetActive,
   counterSetMode,
   counterSetWorkingTime,
   counterSetRestingTime,

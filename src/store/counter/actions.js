@@ -1,8 +1,14 @@
+export const COUNTER_SET_ACTIVE = 'COUNTER/SET_ACTIVE';
 export const COUNTER_SET_MODE = 'COUNTER/SET_MODE';
 export const COUNTER_SET_WORKING_TIME = 'COUNTER/SET_WORKING_TIME';
 export const COUNTER_SET_RESTING_TIME = 'COUNTER/SET_RESTING_TIME';
 export const COUNTER_SET_TARGET = 'COUNTER/SET_TARGET';
 export const COUNTER_RESET = 'COUNTER/RESET';
+
+export const counterSetActive = payload => ({
+  type: COUNTER_SET_ACTIVE,
+  payload,
+});
 
 export const counterSetMode = payload => ({
   type: COUNTER_SET_MODE,

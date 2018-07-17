@@ -1,12 +1,3 @@
-export { default as counterReducer } from './reducer';
-export {
-  counterSetActive,
-  counterSetMode,
-  counterSetWorkingTime,
-  counterSetRestingTime,
-  counterSetTarget,
-  counterReset,
-} from './actions';
 export {
   counterSelector,
   counterActiveSelector,
@@ -15,9 +6,15 @@ export {
   workingTimeTargetSelector,
   restingTimeSelector,
   restingTimeTargetSelector,
+  remainingTimeSelector,
   elapsedTimeSelector,
   targetTimeSelector,
-  remainingTimeSelector,
   completedTimeSelector,
   clockValueSelector,
-} from './selectors';
+} from './counter';
+export {
+  settingsSelector,
+  settingsInMinSelector,
+  workingTimeInMinSelector,
+  restingTimeInMinSelector,
+} from './settings';

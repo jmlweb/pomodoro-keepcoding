@@ -7,6 +7,8 @@ import {
   settingsFormSetWorkingTime as settingsFormSetWorkingTimeACT,
   settingsFormSetRestingTime as settingsFormSetRestingTimeACT,
   settingsFormSetHasSuccess as settingsFormSetHasSuccessACT,
+  workingTimeInMinSelector,
+  restingTimeInMinSelector,
 } from '../../store';
 
 class SettingsContainer extends Component {
@@ -61,8 +63,8 @@ class SettingsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  initialWorkingTime: state.settings.workingTime,
-  initialRestingTime: state.settings.restingTime,
+  initialWorkingTime: workingTimeInMinSelector(state),
+  initialRestingTime: restingTimeInMinSelector(state),
   workingTime: state.settingsForm.workingTime,
   restingTime: state.settingsForm.restingTime,
   hasSuccess: state.settingsForm.hasSuccess,
