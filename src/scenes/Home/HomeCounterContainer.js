@@ -7,6 +7,7 @@ import {
 } from '../../store';
 
 class HomeCounterContainer extends Component {
+  interval = undefined;
   componentDidMount() {
     const {
       counterActive,
@@ -19,7 +20,31 @@ class HomeCounterContainer extends Component {
         restingTimeTarget: restingTime,
       });
     }
+    this.toggleIntervalIfNeeded();
   }
+  componentDidUpdate() {
+    this.toggleIntervalIfNeeded();
+  }
+  startInterval = () => {
+    this.interval = setInterval(() => console.log('interval'), 1000);
+  };
+  stopInterval = () => {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  };
+  toggleIntervalIfNeeded = () => {
+    const { counterActive } = this.props;
+    if (counterActive) {
+      if (!this.interval) {
+        this.startInterval();
+      }
+    } else {
+      if (this.interval) {
+        this.stopInterval();
+      }
+    }
+  };
   render() {
     return <HomeCounter />;
   }
