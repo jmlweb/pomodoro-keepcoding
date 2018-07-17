@@ -1,7 +1,12 @@
 import { createStore } from 'redux';
 import rootReducer from './reducer';
 
-export { settingsSet } from './actions';
+export {
+  settingsSet,
+  settingsFormSet,
+  settingsFormSetWorkingTime,
+  settingsFormSetRestingTime,
+} from './actions';
 
 const store = createStore(
   rootReducer,

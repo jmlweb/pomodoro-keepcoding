@@ -1,32 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import { settingsSet } from '../../store';
+import {
+  settingsSet,
+  settingsFormSet,
+  settingsFormSetWorkingTime as settingsFormSetWorkingTimeACT,
+  settingsFormSetRestingTime as settingsFormSetRestingTimeACT,
+} from '../../store';
 
 class SettingsContainer extends Component {
-  state = {
-    workingTime: this.props.workingTime,
-    restingTime: this.props.restingTime,
-  };
-  static getDerivedStateFromProps({ workingTime, restingTime }) {
-    return {
-      workingTime,
-      restingTime,
-    };
+  componentDidMount() {
+    const {
+      settingsFormSet,
+      initialWorkingTime,
+      initialRestingTime,
+    } = this.props;
+    settingsFormSet({
+      workingTime: initialWorkingTime,
+      restingTime: initialRestingTime,
+    });
   }
   onChangeField = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    const {
+      settingsFormSetWorkingTime,
+      settingsFormSetRestingTime,
+    } = this.props;
+    const fieldFn =
+      e.target.name === 'workingTime'
+        ? settingsFormSetWorkingTime
+        : settingsFormSetRestingTime;
+    fieldFn(e.target.value);
   };
   onSubmit = () => {
-    this.props.settingsSet(this.state);
+    const { workingTime, restingTime, settingsSet } = this.props;
+    settingsSet({
+      workingTime,
+      restingTime,
+    });
   };
   render() {
+    const { workingTime, restingTime } = this.props;
     return (
       <Settings
-        workingTime={this.state.workingTime}
-        restingTime={this.state.restingTime}
+        workingTime={workingTime}
+        restingTime={restingTime}
         onChangeField={this.onChangeField}
         onSubmit={this.onSubmit}
       />
@@ -35,12 +52,17 @@ class SettingsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  workingTime: state.settings.workingTime,
-  restingTime: state.settings.restingTime,
+  initialWorkingTime: state.settings.workingTime,
+  initialRestingTime: state.settings.restingTime,
+  workingTime: state.settingsForm.workingTime,
+  restingTime: state.settingsForm.restingTime,
 });
 
 const mapDispatchToProps = {
   settingsSet,
+  settingsFormSet,
+  settingsFormSetWorkingTime: settingsFormSetWorkingTimeACT,
+  settingsFormSetRestingTime: settingsFormSetRestingTimeACT,
 };
 
 export default connect(
