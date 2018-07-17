@@ -22,6 +22,9 @@ class HomeCounterContainer extends Component {
     }
     this.toggleIntervalIfNeeded();
   }
+  componentWillUnmount() {
+    this.stopInterval();
+  }
   componentDidUpdate() {
     this.toggleIntervalIfNeeded();
   }
