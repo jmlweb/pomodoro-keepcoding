@@ -1,6 +1,7 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import localforage from 'localforage';
 import rootReducer from './reducer';
 
 export {
@@ -39,7 +40,7 @@ export {
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: localforage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -47,6 +48,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(
   persistedReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(ReduxThunk),
 );
 
 const persistor = persistStore(store);
