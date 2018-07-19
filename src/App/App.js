@@ -4,10 +4,13 @@ import { Provider as StyleProvider } from 'rebass';
 import { injectGlobal } from 'styled-components';
 import { normalize } from 'polished';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 import theme from './theme';
 import { Main, Header, Content } from '../layout';
 import { Home, Settings } from '../scenes';
-import store from '../store';
+import storeObj from '../store';
+
+const { store, persistor } = storeObj;
 
 injectGlobal`
   ${normalize()};
@@ -17,17 +20,19 @@ injectGlobal`
 
 const App = () => (
   <StoreProvider store={store}>
-    <StyleProvider theme={theme}>
-      <BrowserRouter>
-        <Main>
-          <Header />
-          <Content>
-            <Route path="/" exact component={Home} />
-            <Route path="/settings" component={Settings} />
-          </Content>
-        </Main>
-      </BrowserRouter>
-    </StyleProvider>
+    <PersistGate persistor={persistor} loading={null}>
+      <StyleProvider theme={theme}>
+        <BrowserRouter>
+          <Main>
+            <Header />
+            <Content>
+              <Route path="/" exact component={Home} />
+              <Route path="/settings" component={Settings} />
+            </Content>
+          </Main>
+        </BrowserRouter>
+      </StyleProvider>
+    </PersistGate>
   </StoreProvider>
 );
 
