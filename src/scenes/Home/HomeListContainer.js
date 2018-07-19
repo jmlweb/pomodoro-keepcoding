@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeList from './HomeList';
 import {
@@ -7,11 +7,17 @@ import {
   archiveLengthSelector,
 } from '../../store';
 
-class HomeListContainer extends PureComponent {
+class HomeListContainer extends Component {
   componentDidMount() {
     const { archiveGet } = this.props;
     // Llamar a la API para actualizar el state de archive
     archiveGet();
+  }
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.pomodoros.map(id => id).join('-') !==
+      nextProps.pomodoros.map(id => id).join('-')
+    );
   }
   render() {
     console.log('HOMELISTCONTAINER RENDERIZA');
