@@ -17,6 +17,7 @@ export {
   counterSetTarget,
   counterReset,
   archiveAdd,
+  archiveGet,
 } from './actions';
 
 export {
@@ -36,6 +37,9 @@ export {
   settingsInMinSelector,
   workingTimeInMinSelector,
   restingTimeInMinSelector,
+  archiveSelector,
+  formattedArchiveSelector,
+  archiveLengthSelector,
 } from './selectors';
 
 const persistConfig = {

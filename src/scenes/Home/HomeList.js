@@ -1,34 +1,33 @@
 import React, { Fragment } from 'react';
 import { Box, Message } from 'rebass';
 import HomeListPomodoro from './HomeListPomodoro';
+import { Card } from '../../components';
 
-const HomeList = ({
-  pomodoros = [
-    { workingTime: 1500, restingTime: 300, createdAt: '23 junio 2018' },
-  ],
-}) => (
-  <Box>
-    {pomodoros.length ? (
-      <Fragment>
-        <HomeListPomodoro
-          workingTime="Tiempo trabajo"
-          restingTime="Tiempo descanso"
-          createdAt="Creado"
-          heading
-        />
-        {pomodoros.map(({ workingTime, restingTime, createdAt }) => (
+const HomeList = ({ pomodoros, pomodorosLength }) => (
+  <Card title={`${pomodorosLength} Pomodoros completados`}>
+    <Box>
+      {pomodoros.length ? (
+        <Fragment>
           <HomeListPomodoro
-            key={createdAt}
-            workingTime={workingTime}
-            restingTime={restingTime}
-            createdAt={createdAt}
+            workingTime="Tiempo trabajo"
+            restingTime="Tiempo descanso"
+            createdAt="Creado"
+            heading
           />
-        ))}
-      </Fragment>
-    ) : (
-      <Message>Aún no hay pomodoros</Message>
-    )}
-  </Box>
+          {pomodoros.map(({ workingTime, restingTime, createdAt }) => (
+            <HomeListPomodoro
+              key={createdAt}
+              workingTime={workingTime}
+              restingTime={restingTime}
+              createdAt={createdAt}
+            />
+          ))}
+        </Fragment>
+      ) : (
+        <Message>Aún no hay pomodoros</Message>
+      )}
+    </Box>
+  </Card>
 );
 
 export default HomeList;

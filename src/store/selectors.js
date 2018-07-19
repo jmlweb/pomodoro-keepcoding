@@ -18,3 +18,8 @@ export {
   workingTimeInMinSelector,
   restingTimeInMinSelector,
 } from './settings';
+export {
+  archiveSelector,
+  formattedArchiveSelector,
+  archiveLengthSelector,
+} from './archive';

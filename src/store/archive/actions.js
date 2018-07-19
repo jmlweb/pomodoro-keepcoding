@@ -1,25 +1,29 @@
 import shortid from 'shortid';
 
+import { addPomodoro, getPomodoros } from '../../services';
+
 export const ARCHIVE_ADD = 'ARCHIVE/ADD';
+export const ARCHIVE_SET = 'ARCHIVE/SET';
+export const ARCHIVE_GET = 'ARCHIVE/GET';
 
 export const archiveAdd = payload => dispatch => {
-  console.log('ENTRA A LA FUNCIÓN');
-  setTimeout(() => {
-    console.log('HACE EL DISPATCH');
-    return dispatch({
-      type: ARCHIVE_ADD,
-      payload: {
-        ...payload,
-        id: shortid.generate(),
-      },
-    });
-  }, 1000);
+  addPomodoro(
+    {
+      ...payload,
+      id: shortid.generate(),
+    },
+    data =>
+      dispatch({
+        type: ARCHIVE_ADD,
+        payload: data,
+      }),
+  );
 };
 
-// export const archiveAdd = payload => ({
-//   type: ARCHIVE_ADD,
-//   payload: {
-//     ...payload,
-//     id: shortid.generate(),
-//   },
-// });
+export const archiveSet = payload => ({
+  type: ARCHIVE_SET,
+  payload,
+});
+
+export const archiveGet = () => dispatch =>
+  getPomodoros(data => dispatch(archiveSet(data)));
