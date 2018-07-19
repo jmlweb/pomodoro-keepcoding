@@ -6,9 +6,14 @@ import {
   counterModeSelector,
   workingTimeSelector,
   restingTimeSelector,
+  workingTimeTargetSelector,
+  restingTimeTargetSelector,
+  counterSetMode as counterSetModeACT,
   counterSetTarget as counterSetTargetACT,
   counterSetWorkingTime as counterSetWorkingTimeACT,
   counterSetRestingTime as counterSetRestingTimeACT,
+  counterReset as counterResetACT,
+  archiveAdd as archiveAddACT,
 } from '../../store';
 
 class HomeCounterContainer extends Component {
@@ -34,25 +39,47 @@ class HomeCounterContainer extends Component {
     this.toggleIntervalIfNeeded();
   }
   startInterval = () => {
-    const INTERVAL_TIME = 500;
+    const INTERVAL_TIME = 250;
     this.interval = setInterval(() => {
       const {
         counterMode,
         workingTime,
         restingTime,
+        counterSetMode,
         counterSetWorkingTime,
         counterSetRestingTime,
+        counterReset,
+        workingTimeTarget,
+        restingTimeTarget,
+        archiveAdd,
       } = this.props;
       if (counterMode === 'working') {
-        counterSetWorkingTime(workingTime + INTERVAL_TIME);
+        const newTime = workingTime + INTERVAL_TIME;
+        if (newTime >= workingTimeTarget) {
+          counterSetMode('resting');
+        } else {
+          counterSetWorkingTime(newTime);
+        }
       } else {
-        counterSetRestingTime(restingTime + INTERVAL_TIME);
+        const newTime = restingTime + INTERVAL_TIME;
+        if (newTime >= restingTimeTarget) {
+          archiveAdd({
+            workingTime,
+            workingTimeTarget,
+            restingTime,
+            restingTimeTarget,
+          });
+          counterReset();
+        } else {
+          counterSetRestingTime(newTime);
+        }
       }
     }, INTERVAL_TIME);
   };
   stopInterval = () => {
     if (this.interval) {
       clearInterval(this.interval);
+      this.interval = undefined;
     }
   };
   toggleIntervalIfNeeded = () => {
@@ -77,13 +104,18 @@ const mapStateToProps = state => ({
   counterMode: counterModeSelector(state),
   workingTime: workingTimeSelector(state),
   restingTime: restingTimeSelector(state),
+  workingTimeTarget: workingTimeTargetSelector(state),
+  restingTimeTarget: restingTimeTargetSelector(state),
   settingsTarget: state.settings,
 });
 
 const mapDispatchToProps = {
   counterSetTarget: counterSetTargetACT,
+  counterSetMode: counterSetModeACT,
   counterSetWorkingTime: counterSetWorkingTimeACT,
   counterSetRestingTime: counterSetRestingTimeACT,
+  counterReset: counterResetACT,
+  archiveAdd: archiveAddACT,
 };
 
 export default connect(

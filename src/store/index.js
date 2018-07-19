@@ -13,6 +13,7 @@ export {
   counterSetRestingTime,
   counterSetTarget,
   counterReset,
+  archiveAdd,
 } from './actions';
 
 export {

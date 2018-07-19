@@ -13,3 +13,4 @@ export {
   counterSetTarget,
   counterReset,
 } from './counter';
+export { archiveAdd } from './archive';
